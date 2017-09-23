@@ -1,0 +1,3 @@
+rootProject.name = 'steemapp'
+
+include ':app'
