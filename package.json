@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "android:sign": "jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore android/app/release.keystore android/app/build/outputs/apk/app-release-unsigned.apk $MYAPP_RELEASE_KEY_ALIAS --storepass $MYAPP_RELEASE_STORE_PASSWORD --keypass $MYAPP_RELEASE_KEY_PASSWORD",
     "test": "jest",
     "haul": "haul start"
   },
