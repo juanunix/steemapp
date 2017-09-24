@@ -1,0 +1,66 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "taskName": "reload-build",
+      "type": "shell",
+      "command": "adb shell input keyevent 46 46",
+      "isBackground": true,
+      "presentation": {
+        "echo": false,
+        "reveal": "never",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "taskName": "debugger-menu",
+      "type": "shell",
+      "command": "adb shell input keyevent 82",
+      "isBackground": true,
+      "presentation": {
+        "echo": false,
+        "reveal": "never",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "taskName": "bind-server",
+      "type": "shell",
+      "command": "adb reverse tcp:8081 tcp:8081",
+      "isBackground": true,
+      "presentation": {
+        "echo": false,
+        "reveal": "never",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "start:logger",
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "never",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "type": "npm",
+      "script": "log:android",
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "never",
+        "focus": false,
+        "panel": "shared"
+      }
+    }
+  ]
+}

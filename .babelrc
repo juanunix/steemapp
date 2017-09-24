@@ -1,3 +1,36 @@
 {
-  "presets": ["react-native"]
+  "presets": ["react-native"],
+  "retainLines": true,  
+  "plugins": [
+    "transform-decorators-legacy",
+    [
+      "module-resolver",
+      {
+        "root": [
+          "./src"
+        ],
+        "alias": {
+          "components": "components",
+          "search": "search",
+          "home": "home",
+          "auth": "auth",
+          "user": "user",
+          "organization": "organization",
+          "repository": "repository",
+          "issue": "issue",
+          "api": "api",
+          "config": "config",
+          "utils": "utils",
+          "locale": "locale",
+          "steem": "steem",
+          "package.json": "./package.json"
+        }
+      }
+    ]
+  ],
+  "env": {
+    "production": {
+      "plugins": ["ignite-ignore-reactotron"]
+    }
+  }
 }
