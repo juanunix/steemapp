@@ -16,7 +16,7 @@
           "auth": "auth",
           "user": "user",
           "organization": "organization",
-          "repository": "repository",
+          "discussion": "discussion",
           "issue": "issue",
           "api": "api",
           "config": "config",

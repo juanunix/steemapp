@@ -6,6 +6,7 @@ import { SplashScreen, LoginScreen } from 'auth'
 
 // Home
 import { HomeScreen } from 'home'
+import { DiscussionScreen } from 'discussion'
 
 import { colors } from 'config';
 
@@ -50,6 +51,12 @@ const HomeNavigator = StackNavigator({
     screen: HomeTabNavigator,
     navigationOptions: {
       headerTitle: 'Home'
+    }
+  },
+  Discussion: {
+    screen: DiscussionScreen,
+    navigationOptions: {
+      headerTitle: 'Discussion'
     }
   }
 }, {
