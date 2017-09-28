@@ -48,7 +48,8 @@ const HomeTabNavigator = TabNavigator({
 
 const HomeNavigator = StackNavigator({
   HomeTabs: {
-    screen: HomeTabNavigator,
+    // screen: HomeTabNavigator,
+    screen: HomeScreen,
     navigationOptions: {
       headerTitle: 'Home'
     }
@@ -70,18 +71,18 @@ const HomeNavigator = StackNavigator({
   }
 })
 
-const MainDrawer = DrawerNavigator({
-  Home: {
-    screen: HomeNavigator,
-    navigationOptions: {
-      drawerLabel: 'Home'
-    }
-  }
-})
+// const MainDrawer = DrawerNavigator({
+//   Home: {
+//     screen: HomeNavigator,
+//     navigationOptions: {
+//       drawerLabel: 'Home'
+//     }
+//   }
+// })
 
 export const NoteAround = StackNavigator({
   Main: {
-    screen: MainDrawer
+    screen: HomeNavigator
   },
   Splash: {
     screen: SplashScreen

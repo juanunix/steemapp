@@ -12,11 +12,11 @@ export const configureStore = () => {
   const sagaMiddleware = createSagaMiddleware({})
   middlewares.push(sagaMiddleware)
 
-  // if (__DEV__) {
-  //   if (process.env.LOGGER_ENABLED) {
+  if (__DEV__) {
+    if (process.env.LOGGER_ENABLED) {
       middlewares.push(createLogger())
-  //   }
-  // }
+    }
+  }
 
   enhancers.push(autoRehydrate())
 

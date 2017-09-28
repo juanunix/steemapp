@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Text, FlatList, AsyncStorage } from 'react-native'
+import { Text, FlatList, View, AsyncStorage } from 'react-native'
 import steem from 'steem';
 import styled from 'styled-components/native';
 import { colors } from 'config';
@@ -16,15 +16,28 @@ const Container = styled.View`
 
 const DB_KEY = 'HOME';
 
-export class HomeScreen extends PureComponent {
+export class HomeScreen extends Component {
   state = {
     feed: [],
     error: null,
-    fetching: false
+    fetching: false,
+    refreshing: false
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if(this.state.feed.length !== nextState.feed.length) {
+      return true;
+    } else if(nextState.feed.length > 0 && this.state.feed[0].id !== nextState.feed[0].id) {
+      return true
+    }
+    if(this.state.fetching !== nextState.fetching) {
+      return true;
+    }
+    return false;
   }
 
   componentWillMount () {
-    this.getFeedArray()
+    this.getFeedArray(true)
   }
 
   getSavedFeed = async () => {
@@ -32,8 +45,8 @@ export class HomeScreen extends PureComponent {
       let savedFeed = await AsyncStorage.getItem(DB_KEY);
       if(!savedFeed) return;
       savedFeed = JSON.parse(savedFeed);
+      console.log(savedFeed[0])
       await this.setState({
-        fetching: false,
         feed: savedFeed,
         error: null,
       })
@@ -48,6 +61,7 @@ export class HomeScreen extends PureComponent {
 
   getFeedArray = async () => {
     await this.setState({
+      refreshing: true,
       fetching: true
     })
     try {
@@ -56,26 +70,69 @@ export class HomeScreen extends PureComponent {
       await this.setState({
         feed,
         error:null,
-        fetching: false
+        fetching: false,
+        refreshing: false
       })
       await this.saveFeed();
     } catch(e) {
+      console.log(e)
       await this.setState({
         feed: [],
         fetching: false,
+        refreshing: false,
+        error: e
+      })
+    }
+  }
+
+  onEndReached = async (info) => {
+    if(this.state.fetching) return;
+    await this.setState({
+      fetching: true
+    })
+    try {
+      const query = {
+        tag: "",
+        limit: 10,
+        start_permlink: this.state.feed[this.state.feed.length - 1].permlink,
+        start_author: this.state.feed[this.state.feed.length - 1].author
+      }
+      const nextFeed = await steem.api.getDiscussionsByTrendingAsync(query)
+      console.log(nextFeed)
+      this.setState(prevState => ({
+        feed: [
+          ...prevState.feed,
+          ...nextFeed.slice(1),
+        ],
+        fetching: false,
+        error: null
+      }))
+      // await this.saveFeed();
+    } catch(e) {
+      await this.setState({
+        fetching: false,
+        refreshing: false,
         error: e
       })
     }
   }
 
   render () {
-    if(this.state.fetching) return <LoadingContainer />
+    // if(this.state.fetching) return <LoadingContainer />
     return (
       <Container>
         <FlatList
+          removeClippedSubviews={true}
           data={this.state.feed}
           keyExtractor={(item) => item.id}
           renderItem={({item}) => <DiscussionComponent discussion={item} navigation={this.props.navigation}/>}
+          onEndReached={this.onEndReached}
+          onEndReachedThreshold={0.1}
+          refreshing={this.state.refreshing}
+          onRefresh={this.getFeedArray}
+          ListFooterComponent={() => 
+            <LoadingContainer />
+          }
         />
       </Container>
     )

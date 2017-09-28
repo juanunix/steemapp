@@ -22,7 +22,6 @@
           "config": "config",
           "utils": "utils",
           "locale": "locale",
-          "steem": "steem",
           "package.json": "./package.json"
         }
       }

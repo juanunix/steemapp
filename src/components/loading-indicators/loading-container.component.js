@@ -11,7 +11,7 @@ type Props = {
 
 const styles = StyleSheet.create({
   loadingContainer: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.primaryDark,
     flex: 1,
     alignItems: 'center'
   },

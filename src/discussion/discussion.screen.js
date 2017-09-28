@@ -5,6 +5,7 @@ import uuid from 'react-native-uuid';
 
 import { openURLInView } from 'utils';
 import { colors } from 'config';
+import { HyperLink } from 'components';
 
 const Content = styled.ScrollView`
   padding-vertical: 5;
@@ -134,9 +135,7 @@ export class DiscussionScreen extends PureComponent {
     if(tag === '<a>') {
       let url = attrs.filter(a => a.key === 'href')[0];
       return (
-        <TouchableNativeFeedback onPress={() => openURLInView(url.value)} key={key}>
-          <Link>{text}</Link>
-        </TouchableNativeFeedback>
+        <HyperLink link={url.value} key={key}>{text}</HyperLink>
       )
     }
     return (
