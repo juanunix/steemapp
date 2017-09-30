@@ -131,7 +131,11 @@ export class HomeScreen extends Component {
           refreshing={this.state.refreshing}
           onRefresh={this.getFeedArray}
           ListFooterComponent={() => 
-            <LoadingContainer />
+            <View>
+              {this.state.fetching &&
+                <LoadingContainer />
+              }
+            </View>
           }
         />
       </Container>
