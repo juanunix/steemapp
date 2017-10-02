@@ -7,7 +7,7 @@ import { colors } from 'config';
 
 
 const Link = styled.Text`
-color: ${colors.blue};
+color: ${colors.lightBlue};
 `
 
 export const HyperLink = ({children, link}) => (

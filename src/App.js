@@ -5,6 +5,13 @@ import { persistStore } from 'redux-persist'
 import createEncryptor from 'redux-persist-transform-encrypt'
 import DeviceInfo from 'react-native-device-info'
 import md5 from 'md5'
+import steem from 'steem';
+
+steem.api.setOptions({url : "wss://steemd-int.steemit.com"});
+// steem.api.setOptions({url : "wss://steemd.steemitstage.com"});
+
+// For Russia:
+// steem.api.setOptions({url : "wss://ws.golos.io"});
 
 import { Splash } from 'components'
 
