@@ -5,26 +5,31 @@ import { StackNavigator, DrawerNavigator, TabNavigator } from 'react-navigation'
 import { SplashScreen, LoginScreen } from 'auth'
 
 // Home
-import { HomeScreen } from 'home'
+import {
+  NewHomeScreen,
+  HotHomeScreen,
+  TrendingHomeScreen,
+  PromotedHomeScreen
+} from 'home'
 import { DiscussionScreen } from 'discussion'
 
 import { colors } from 'config';
 
 const HomeTabNavigator = TabNavigator({
   New: {
-    screen: HomeScreen,
+    screen: NewHomeScreen,
     navigationOptions: {}
   },
   Hot: {
-    screen: HomeScreen,
+    screen: HotHomeScreen,
     navigationOptions: {}
   },
   Trending: {
-    screen: HomeScreen,
+    screen: TrendingHomeScreen,
     navigationOptions: {}
   },
   Promoted: {
-    screen: HomeScreen,
+    screen: PromotedHomeScreen,
     navigationOptions: {}
   }
 }, {
@@ -48,10 +53,11 @@ const HomeTabNavigator = TabNavigator({
 
 const HomeNavigator = StackNavigator({
   HomeTabs: {
-    // screen: HomeTabNavigator,
-    screen: HomeScreen,
+    screen: HomeTabNavigator,
+    // screen: TrendingHomeScreen,
     navigationOptions: {
-      headerTitle: 'Home'
+      // headerTitle: 'Home'
+      header: null
     }
   },
   Discussion: {

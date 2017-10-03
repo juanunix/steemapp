@@ -61,6 +61,28 @@
         "focus": false,
         "panel": "shared"
       }
+    },
+    {
+      "type": "npm",
+      "script": "build:android",
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "never",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "type": "npm",
+      "script": "android:run",
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "never",
+        "focus": false,
+        "panel": "shared"
+      }
     }
   ]
 }

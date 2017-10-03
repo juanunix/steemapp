@@ -4,6 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "build:android": "npm run android:build && npm run android:run",
+    "android:run": "(sleep 1 && npm run android:reverse && sleep 1 && npm run android:launch) & npm run start:logger",
+    "android:build": "cd android && ./gradlew installDebug && cd ..",
+    "android:launch": "adb shell am start -n com.steemapp/com.steemapp.MainActivity",
+    "android:reverse": "adb reverse tcp:8081 tcp:8081",
     "android:sign": "jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore android/app/release.keystore android/app/build/outputs/apk/app-release-unsigned.apk $MYAPP_RELEASE_KEY_ALIAS --storepass $MYAPP_RELEASE_STORE_PASSWORD --keypass $MYAPP_RELEASE_KEY_PASSWORD",
     "test": "jest",
     "haul": "haul start",
